@@ -1,0 +1,13 @@
+#info-container {
+    min-width: 330px;
+    max-width: 500px;
+    width: 70%;
+    height: 280px;
+}
+
+#spinner img {
+    width: 150px;
+    height: 150px;
+    animation: Logo-spin infinite 20s linear, move 0.5s linear;
+    position: relative
+}
