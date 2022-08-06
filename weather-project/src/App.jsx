@@ -57,7 +57,7 @@ function App() {
         {(typeof weather.main != 'undefined' ? (
           <Info
             local={weather.name}
-            temperature={`${parseInt(weather.main.temp)}°`}
+            temperature={`${parseInt(weather.main.temp)}°C`}
             clouds={weather.weather[0].description}
             humidity={`${weather.main.humidity}%`}
             wind={`${weather.wind.speed * 3, 6}m/s`}
