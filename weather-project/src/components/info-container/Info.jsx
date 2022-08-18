@@ -1,6 +1,6 @@
 import React from 'react'
 import './Info.css'
-import '../../components/animation.css'
+import '../../components/logo-spin.css'
 
 const Info = (props) => {
 

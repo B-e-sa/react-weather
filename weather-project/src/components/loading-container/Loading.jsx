@@ -1,6 +1,6 @@
 import React from 'react'
 import './Loading.css'
-import '../../components/animation.css'
+import '../../components/logo-spin.css'
 
 const Loading = (props) => {
     return (

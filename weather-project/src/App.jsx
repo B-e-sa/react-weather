@@ -15,10 +15,19 @@ function App() {
   const date = new Date()
   const time = date.getHours()
 
-  const dayTime = time <= 18 ? ('day') : ('night')
-  const bgColor = dayTime === 'day' ? ('rgba(255, 255, 255, 0.2)') : ('rgba(165, 165, 165, 0.5)')
-  const textColor = dayTime != 'day' && ('white')
-  const color = dayTime != 'day' && ('invert(100%)')
+  let bgColor = ''
+  let dayTime = ''
+  let textColor = ''
+  let color = ''
+
+  if (time <= 18) {
+    bgColor = ('rgba(165, 165, 165, 0.5)')
+    dayTime = 'night'
+  }
+    bgColor = ('rgba(255, 255, 255, 0.2)')
+    dayTime = 'day'
+    textColor = 'white'
+    color = 'invert(100%)'
 
   const search = (event) => {
     if (event.key === 'Enter') {
@@ -36,12 +45,10 @@ function App() {
 
   return (
     <div>
-
       <div className='App d-flex align-items-center flex-column justify-content-center position-relative'
         style={{
           backgroundImage: `url('../src/assets/backgrounds/${dayTime}.jpg')`,
         }}>
-
         <div className='container flex-column d-flex align-items-center'>
           <input
             type='text'
@@ -53,7 +60,6 @@ function App() {
             value={location}
           />
         </div>
-
         {(typeof weather.main != 'undefined' ? (
           <Info
             local={weather.name}
