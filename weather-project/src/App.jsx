@@ -6,28 +6,15 @@ import React, { useState } from 'react'
 
 function App() {
 
-  const [weather, setWeather] = useState([])
+  const [weather, setWeather] = useState({})
   const [location, setLocation] = useState('')
+  const [style, setStyle] = useState({
+    bgColor: 'rgba(255, 255, 255, 0.2)',
+    dayTime: 'day'
+  })
 
   const API_KEY = import.meta.env.VITE_API_KEY
   const language = 'en_us'
-
-  const date = new Date()
-  const time = date.getHours()
-
-  let bgColor = ''
-  let dayTime = ''
-  let textColor = ''
-  let color = ''
-
-  if (time <= 18) {
-    bgColor = ('rgba(165, 165, 165, 0.5)')
-    dayTime = 'night'
-  }
-    bgColor = ('rgba(255, 255, 255, 0.2)')
-    dayTime = 'day'
-    textColor = 'white'
-    color = 'invert(100%)'
 
   const search = (event) => {
     if (event.key === 'Enter') {
@@ -37,7 +24,15 @@ function App() {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          setWeather(data)
+          setWeather({
+            main: data.main,
+            local: data.name,
+            temperature: data.main.temp,
+            clouds: data.weather[0].description,
+            humidity: data.main.humidity,
+            wind: data.wind.speed
+
+          })
           setLocation('')
         })
     }
@@ -47,7 +42,7 @@ function App() {
     <div>
       <div className='App d-flex align-items-center flex-column justify-content-center position-relative'
         style={{
-          backgroundImage: `url('../src/assets/backgrounds/${dayTime}.jpg')`,
+          backgroundImage: `url('../src/assets/backgrounds/${style.dayTime}.jpg')`,
         }}>
         <div className='container flex-column d-flex align-items-center'>
           <input
@@ -62,20 +57,11 @@ function App() {
         </div>
         {(typeof weather.main != 'undefined' ? (
           <Info
-            local={weather.name}
-            temperature={`${parseInt(weather.main.temp)}°C`}
-            clouds={weather.weather[0].description}
-            humidity={`${weather.main.humidity}%`}
-            wind={`${weather.wind.speed * 3, 6}m/s`}
-            time={dayTime}
-            bgColor={bgColor}
-            color={color}
-            text={textColor}
+            data={weather}
+            style={style}
           />) : (
           <Loading
-            time={dayTime}
-            bgColor={bgColor}
-            color={color}
+            style={style}
           />)
         )}
       </div>
