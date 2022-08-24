@@ -12,7 +12,7 @@
 
 ### To use your own API key
 
-Create a .env file inside the weather-project folder, then write (remote the curly brackets)<br>
+Create a .env file inside the weather-project folder, then write (remove the curly brackets)<br>
 `` VITE_API_KEY={ YOUR_API_KEY } ``
 
 ### To Start Server:
