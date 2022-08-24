@@ -10,9 +10,14 @@
 
 `` npm install ``
 
-To Start Server:
+### To use your own API key
+
+Create a .env file inside the weather-project folder, then write <br>
+`` VITE_API_KEY={ YOUR_API_KEY } ``
+
+### To Start Server:
 
 `` cd weather-project``
 `` npm run dev ``
 
-To visit the app, use the **local** adress provided by Vite on the **terminal**
+### To visit the app, use the **local** adress provided by Vite on the **terminal**
