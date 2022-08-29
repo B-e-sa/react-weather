@@ -43,11 +43,11 @@ const Info = (props) => {
                     '
                 >
                     <img
-                        className="
+                        className='
                         m-2 
                         me-4
                         position-relative
-                        "
+                        '
                         style={{
                             height: layoutWidth ?
                                 "120px"
@@ -65,7 +65,7 @@ const Info = (props) => {
                         justify-content-center 
                         me-4
                         mt-2
-                    '
+                        '
                     >
                         <span style={{ animation: "Load 2s linear" }}>
                             <h4> {props.data.local} </h4>

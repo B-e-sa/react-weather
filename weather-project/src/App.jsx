@@ -64,7 +64,7 @@ function App() {
             value={location}
           />
         </div>
-        {hasError ?
+        {hasError || weather.main === undefined ?
           (
             <Loading
               style={style}
