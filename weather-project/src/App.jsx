@@ -24,7 +24,7 @@ function App() {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric&lang=${language}`
 
       axios.get(url)
-        .catch((error) => {
+        .catch(() => {
           setHasError(true)
         })
         .then((res) => {
