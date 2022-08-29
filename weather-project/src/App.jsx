@@ -9,6 +9,7 @@ function App() {
 
   const [weather, setWeather] = useState({})
   const [location, setLocation] = useState('')
+  const [hasError, setHasError] = useState(false)
   const [style, setStyle] = useState({
     bgColor: 'rgba(255, 255, 255, 0.2)',
     dayTime: 'day'
@@ -23,15 +24,24 @@ function App() {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric&lang=${language}`
 
       axios.get(url)
+        .catch((error) => {
+          setHasError(true)
+        })
         .then((res) => {
-          setWeather({
-            main: res.data.main,
-            local: res.data.name,
-            temperature: res.data.main.temp,
-            clouds: res.data.weather[0].description,
-            wind: res.data.wind.speed
-          })
-          setLocation('')
+          if (res === undefined) {
+            setHasError(true)
+          } else {
+            setHasError(false)
+            setWeather({
+              main: res.data.main,
+              local: res.data.name,
+              temperature: res.data.main.temp,
+              clouds: res.data.weather[0].description,
+              wind: res.data.wind.speed,
+              humidity: res.data.main.humidity
+            })
+            setLocation('')
+          }
         })
     }
   }
@@ -43,6 +53,7 @@ function App() {
           backgroundImage: `url('../src/assets/backgrounds/${style.dayTime}.jpg')`,
         }}>
         <div className='container flex-column d-flex align-items-center'>
+          {hasError ? <div style={{ fontSize: "15pt", color: "white" }}> An error occurred, plase try again </div> : null}
           <input
             type='text'
             id='text-bar'
@@ -53,15 +64,17 @@ function App() {
             value={location}
           />
         </div>
-        {(typeof weather.main != 'undefined' ? (
-          <Info
-            data={weather}
-            style={style}
-          />) : (
-          <Loading
-            style={style}
-          />)
-        )}
+        {hasError ?
+          (
+            <Loading
+              style={style}
+            />) :
+          (
+            <Info
+              data={weather}
+              style={style}
+            />)
+        }
       </div>
     </div>
   )

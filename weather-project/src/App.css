@@ -19,3 +19,13 @@ input {
   min-width: 310px;
   max-width: 500px
 }
+
+@media (min-width: 600px) {
+  #spinner > img {
+    height: 50px;
+    margin-right: 0;
+  }
+  #infos {
+    margin-right: 0;
+  }
+}
