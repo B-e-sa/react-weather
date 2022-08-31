@@ -4,6 +4,15 @@ import '../../components/logo-spin.css'
 
 const Info = (props) => {
 
+    const [mediaQuery, setMediaQuery] = useState(false)
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            setMediaQuery(window.matchMedia('(max-width: 600px)').matches)
+        })
+        return () => window.removeEventListener('resize', () => setMediaQuery(false))
+    }, [])
+
     const textSizeStyle = {
         fontSize: "18pt"
     }
@@ -59,10 +68,7 @@ const Info = (props) => {
                     </div>
                 </div>
                 <div
-                    className='
-                        d-flex 
-                        flex-column
-                        '
+                    className={`${mediaQuery ? null : "ms-5"} d-flex flex-column`}
                     style={{ animation: "Load 2s linear" }}>
                     <h1 className='m-0 mb-3' style={{ fontSize: "50pt" }}> {`${parseInt(props.data.temperature)}°C`} </h1>
                     <div className='d-flex flex-column'>
