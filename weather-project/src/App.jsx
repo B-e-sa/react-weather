@@ -1,7 +1,12 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 import Info from './components/info-container/Info'
 import Loading from './components/loading-container/Loading'
+
+import icons from './assets/exportIcons'
+import dayBackground from './assets/backgrounds/day.jpg'
+
 import React, { useState } from 'react'
 import axios from 'axios'
 
@@ -10,10 +15,6 @@ function App() {
   const [weather, setWeather] = useState({})
   const [location, setLocation] = useState('')
   const [hasError, setHasError] = useState(false)
-  const [style, setStyle] = useState({
-    bgColor: 'rgba(255, 255, 255, 0.2)',
-    dayTime: 'day'
-  })
 
   const API_KEY = import.meta.env.VITE_API_KEY
   const language = 'en_us'
@@ -48,16 +49,35 @@ function App() {
 
   return (
     <div>
-      <div className='App d-flex align-items-center flex-column justify-content-center position-relative'
+      <div
+        className='
+        App 
+        d-flex 
+        align-items-center 
+        flex-column 
+        justify-content-center 
+        position-relative
+        '
         style={{
-          backgroundImage: `url('../src/assets/backgrounds/${style.dayTime}.jpg')`,
+          backgroundImage: `url(${dayBackground})`,
         }}>
         <div className='container flex-column d-flex align-items-center'>
           {hasError ? <div style={{ fontSize: "15pt", color: "white" }}> An error occurred, plase try again </div> : null}
           <input
             type='text'
             id='text-bar'
-            className=' border light form-control shadow-sm rounded-5 p-2 ps-4 h-100 m-4 text-black'
+            className='
+            border 
+            light 
+            form-control 
+            shadow-sm 
+            ounded-5 
+            p-2 
+            ps-4 
+            h-100 
+            m-4 
+            text-black
+            '
             placeholder='Search a local'
             onChange={event => setLocation(event.target.value)}
             onKeyDown={search}
@@ -67,12 +87,12 @@ function App() {
         {hasError || weather.main === undefined ?
           (
             <Loading
-              style={style}
+              icons={icons}
             />) :
           (
             <Info
               data={weather}
-              style={style}
+              icons={icons}
             />)
         }
       </div>

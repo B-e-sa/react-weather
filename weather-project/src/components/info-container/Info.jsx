@@ -4,22 +4,8 @@ import '../../components/logo-spin.css'
 
 const Info = (props) => {
 
-    const [layoutWidth, setLayoutWidth] = useState(window.innerWidth <= 550)
-
-    const updateLayout = () => {
-        setLayoutWidth(window.innerWidth < 550);
-    }
-
-    useEffect(() => {
-        window.addEventListener("resize", updateLayout)
-        return () => window.removeEventListener("resize", updateLayout);
-    }, [])
-
     const textSizeStyle = {
-        fontSize: layoutWidth ?
-            "15pt"
-            :
-            "18pt"
+        fontSize: "18pt"
     }
 
     return (
@@ -29,10 +15,13 @@ const Info = (props) => {
             justify-content-center 
             align-items-center 
             rounded 
-            container
             '
-            style={{ backgroundColor: props.style.bgColor }}>
-            <div className='d-flex'>
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+            <div
+                className='
+                d-flex
+                '
+            >
                 <div
                     id='spinner'
                     className='
@@ -49,15 +38,12 @@ const Info = (props) => {
                         position-relative
                         '
                         style={{
-                            height: layoutWidth ?
-                                "120px"
-                                :
-                                "150px",
+                            height: "150px",
                             animation: "Logo-spin infinite 20s linear, move 0.5s linear"
                         }}
-                        src={`../src/assets/icons/${props.style.dayTime}.svg`}
+                        src={props.icons.dayIcon}
                         draggable="false"
-                        alt={props.style.time}
+                        alt='sun icon'
                     />
                     <div
                         className='
@@ -73,29 +59,23 @@ const Info = (props) => {
                     </div>
                 </div>
                 <div
-                    className={
-                        `${layoutWidth ?
-                            "ms-0"
-                            :
-                            "ms-4"
-                        } 
+                    className='
                         d-flex 
                         flex-column
-                        `
-                    }
+                        '
                     style={{ animation: "Load 2s linear" }}>
                     <h1 className='m-0 mb-3' style={{ fontSize: "50pt" }}> {`${parseInt(props.data.temperature)}°C`} </h1>
                     <div className='d-flex flex-column'>
                         <div className='d-flex'>
-                            <img src="../src/assets/icons/cloud.svg" alt="cloud" width={'25px'} />
+                            <img src={props.icons.cloudIcon} alt="cloud" width={'25px'} />
                             <p className='mx-3 mb-0' style={textSizeStyle}> {(props.data.clouds)} </p>
                         </div>
                         <div className='d-flex'>
-                            <img src="../src/assets/icons/humidity.svg" alt="humidity" width={'25px'} />
+                            <img src={props.icons.humidityIcon} alt="humidity" width={'25px'} />
                             <p className='mx-3 mb-0' style={textSizeStyle}> {`${props.data.humidity}%`} </p>
                         </div>
                         <div className='d-flex'>
-                            <img src='../src/assets/icons/wind.svg' alt="wind" width={'25px'} />
+                            <img src={props.icons.windIcon} alt="wind" width={'25px'} />
                             <p className='mx-3 mb-0' style={textSizeStyle}> {`${props.data.wind * 3, 6} m/s`} </p>
                         </div>
                     </div>
