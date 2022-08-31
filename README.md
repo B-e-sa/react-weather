@@ -1,5 +1,9 @@
 # react-weather ☂️
 
+## Link <br>
+
+### https://b-e-sa-forecast.netlify.app
+
 ## This project is basically an weather forecast app, the weather infos are gathered from the OpenWeather API (https://openweathermap.org/api)
 
 ### it was made for study purposes, basically consuming an API with vite-react and styling the project with bootstrap
@@ -17,7 +21,7 @@ Create a .env file inside the weather-project folder, then write (remove the cur
 
 ### To Start Server:
 
-`` cd weather-project``
+`` cd weather-project`` <br>
 `` npm run dev ``
 
 ### To visit the app, use the **local** adress provided by Vite on the **terminal**
