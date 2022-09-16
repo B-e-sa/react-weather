@@ -19,12 +19,12 @@ function App() {
   const API_KEY = import.meta.env.VITE_API_KEY
   const language = 'en_us'
 
-  const search = (event) => {
+  const search = async (event) => {
     if (event.key === 'Enter') {
 
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric&lang=${language}`
 
-      axios.get(url)
+      await axios.get(url)
         .catch(() => {
           setHasError(true)
         })
