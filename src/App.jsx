@@ -1,14 +1,10 @@
-import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import './App.css'
 import Info from './components/info-container/Info'
 import Loading from './components/loading-container/Loading'
-
-import icons from './assets/exportIcons'
 import dayBackground from './assets/backgrounds/day.jpg'
-
-import React, { useState } from 'react'
 import axios from 'axios'
+import React, { useState } from 'react'
 
 function App() {
 
@@ -29,17 +25,22 @@ function App() {
           setHasError(true)
         })
         .then((res) => {
+
+          const { data } = res
+          const { main, name, weather, wind } = data
+          const { temp, humidity } = main
+
           if (res === undefined) {
             setHasError(true)
           } else {
             setHasError(false)
             setWeather({
-              main: res.data.main,
-              local: res.data.name,
-              temperature: res.data.main.temp,
-              clouds: res.data.weather[0].description,
-              wind: res.data.wind.speed,
-              humidity: res.data.main.humidity
+              main: main,
+              temperature: temp,
+              humidity: humidity,
+              local: name,
+              clouds: weather[0].description,
+              wind: wind.speedy
             })
             setLocation('')
           }
@@ -50,34 +51,17 @@ function App() {
   return (
     <div>
       <div
-        className='
-        App 
-        d-flex 
-        align-items-center 
-        flex-column 
-        justify-content-center 
-        position-relative
-        '
-        style={{
-          backgroundImage: `url(${dayBackground})`,
-        }}>
+        className='App d-flex align-items-center flex-column justify-content-center position-relative'
+        style={{ backgroundImage: `url(${dayBackground})` }}>
         <div className='container flex-column d-flex align-items-center'>
-          {hasError ? <div style={{ fontSize: "15pt", color: "white" }}> An error occurred, plase try again </div> : null}
+          {hasError ?
+            <div style={{ fontSize: "15pt", color: "white" }}>
+              An error occurred, please try again
+            </div> : null}
           <input
             type='text'
             id='text-bar'
-            className='
-            border 
-            light 
-            form-control 
-            shadow-sm 
-            ounded-5 
-            p-2 
-            ps-4 
-            h-100 
-            m-4 
-            text-black
-            '
+            className='border light form-control shadow-sm rounded-5 p-2 ps-4 h-100 m-4 text-black'
             placeholder='Search a local'
             onChange={event => setLocation(event.target.value)}
             onKeyDown={search}
@@ -85,15 +69,9 @@ function App() {
           />
         </div>
         {hasError || weather.main === undefined ?
-          (
-            <Loading
-              icons={icons}
-            />) :
-          (
-            <Info
-              data={weather}
-              icons={icons}
-            />)
+          <Loading />
+          :
+          <Info data={weather} />
         }
       </div>
     </div>
